@@ -1,6 +1,7 @@
 package gee
 
 import (
+	"log"
 	"net/http"
 )
 
@@ -57,5 +58,6 @@ func (engine *Engine) ServeHTTP(w http.ResponseWriter, req *http.Request) {
 	} else {
 		// 不存在则404
 		w.WriteHeader(http.StatusNotFound)
+		log.Fatalf("404 not found: %s", req.URL.Path)
 	}
 }
