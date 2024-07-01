@@ -24,12 +24,12 @@ func main() {
 		}
 	})
 
-	engine.GET("/go", func(context *gee.Context) {
-		context.Json(http.StatusOK, gee.MyMap{"name": "cxx", "age": 123})
+	engine.GET("/hello/:name", func(context *gee.Context) {
+		context.Json(http.StatusOK, gee.MyMap{"name": context.Params["name"], "age": 123})
 	})
 
-	engine.GET("/data", func(context *gee.Context) {
-		err := context.Data(http.StatusOK, []byte("DATA HELLO"))
+	engine.GET("/assets/*filepath", func(context *gee.Context) {
+		err := context.Data(http.StatusOK, []byte(context.Params["filepath"]))
 		if err != nil {
 			context.Error(http.StatusInternalServerError, err)
 		}
